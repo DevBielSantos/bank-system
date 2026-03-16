@@ -1,5 +1,8 @@
 package com.bank.model;
 
+import com.bank.exception.SaldoInsuficienteException;
+import com.bank.exception.ValorInvalidoException;
+
 public class Conta {
     private final int number;
     private double saldo;
@@ -25,7 +28,7 @@ public class Conta {
 
     public void deposit(double valor) {
         if (valor <= 0) {
-            throw new IllegalArgumentException("Valor invalido");
+            throw new ValorInvalidoException("Valor invalido");
         }
 
         saldo += valor;
@@ -36,7 +39,7 @@ public class Conta {
             throw new IllegalArgumentException("Valor invalido");
         }
         if (valor > saldo) {
-            throw new RuntimeException("Saldo Insuficiente");
+            throw new SaldoInsuficienteException("Saldo Insuficiente");
         }
 
         saldo -= valor;
